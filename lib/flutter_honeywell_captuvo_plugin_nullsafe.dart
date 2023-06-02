@@ -23,7 +23,7 @@ class FlutterHoneywellCaptuvoPlugin {
       MethodChannel('flutter_honeywell_captuvo_plugin_method_channel');
   static const EventChannel _eventChannel =
       EventChannel('flutter_honeywell_captuvo_plugin_event_channel');
-  static Stream<Map<String, dynamic>>? _eventStrem;
+  static Stream<Map<String, dynamic>>? _eventStream;
 
   /// This method is used to turn on the decoder hardware in the device.
   ///
@@ -70,7 +70,7 @@ class FlutterHoneywellCaptuvoPlugin {
   }
 
   static Stream<Map<String, dynamic>> get _decoderEventStream {
-    return (_eventStrem ??=
+    return (_eventStream ??=
         _eventChannel.receiveBroadcastStream().map((msg) => jsonDecode(msg)));
   }
 

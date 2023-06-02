@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_honeywell_captuvo_plugin_nullsafe/flutter_honeywell_captuvo_plugin_nullsafe.dart';
 
-void main() => runApp(MaterialApp(home: MyApp()));
+void main() => runApp(const MaterialApp(home: MyApp()));
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  StreamSubscription decoderConnectionStreamSubscription;
-  StreamSubscription decoderScanDataStreamSubscription;
+  late StreamSubscription decoderConnectionStreamSubscription;
+  late StreamSubscription decoderScanDataStreamSubscription;
 
   @override
   void initState() {
@@ -37,8 +39,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
-    decoderConnectionStreamSubscription?.cancel();
-    decoderScanDataStreamSubscription?.cancel();
+    decoderConnectionStreamSubscription.cancel();
+    decoderScanDataStreamSubscription.cancel();
     super.dispose();
   }
 
@@ -73,7 +75,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Captuvo SL42 API Example'),
+        title: const Text('Captuvo SL22/SL42 API Example'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -85,7 +87,7 @@ class _MyAppState extends State<MyApp> {
                 stream: FlutterHoneywellCaptuvoPlugin.decoderConnectionStream,
                 initialData: false,
                 builder: (_, snapshot) => Text(
-                    'Decoder is ${snapshot.data ? "Conencted" : "Disconnected"}'),
+                    'Decoder is ${snapshot.data! ? "Connected" : "Disconnected"}'),
               ),
               const SizedBox(height: 10.0),
               StreamBuilder<String>(
@@ -106,7 +108,7 @@ class _MyAppState extends State<MyApp> {
             color: Colors.blue,
             borderRadius: BorderRadius.circular(50.0),
           ),
-          child: Icon(Icons.scanner),
+          child: const Icon(Icons.scanner),
         ),
         onTapDown: (_) => FlutterHoneywellCaptuvoPlugin.startDecoderScanning(),
         onTapUp: (_) => FlutterHoneywellCaptuvoPlugin.stopDecoderScanning(),

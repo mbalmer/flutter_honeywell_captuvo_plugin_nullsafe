@@ -12,6 +12,7 @@ Make sure you have the following added into the `ios/Info.plist`:
 	<key>UISupportedExternalAccessoryProtocols</key>
 	<array>
 		<string>com.honeywell.scansled.protocol.decoder</string>
+		<string>com.honeywell.scansled.protocol.pm</string>
 	</array>
 ```
 
